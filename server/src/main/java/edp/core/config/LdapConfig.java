@@ -29,7 +29,7 @@ public class LdapConfig {
     public LdapContextSource contextSource() {
         LdapContextSource contextSource = new LdapContextSource();
 
-        Map<String, Object> config = new HashMap();
+        Map<String, Object> config = new HashMap<>();
         config.put("java.naming.ldap.attributes.binary", "objectGUID");
 
         contextSource.setUrl(ldapUrl);

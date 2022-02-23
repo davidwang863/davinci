@@ -20,8 +20,8 @@
 package edp.core.utils;
 
 import com.alibaba.druid.util.StringUtils;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
+// import com.sun.image.codec.jpeg.JPEGCodec;
+// import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import edp.davinci.core.enums.ActionEnum;
 import edp.davinci.core.enums.FileTypeEnum;
 import edp.davinci.core.enums.LogNameEnum;
@@ -297,13 +297,23 @@ public class FileUtils {
             imageLength = file.length();
             scheduleLogger.warn("Final compressed file size {}",imageLength);
 
+            /*
+             * 类库过老，更新到新的库
+
             FileOutputStream output = new FileOutputStream(filepath);
             //将图片按JPEG压缩
             JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(output);
             encoder.encode(img_dest);
             output.close();
 
-            return new File(filepath);
+            //return new File(filepath);
+             */
+
+            String fileFormat = filepath.substring(filepath.lastIndexOf('.') + 1);
+            File outFile = new File(filepath);
+            ImageIO.write(img_dest, fileFormat, outFile);
+
+            return outFile;
         } catch (Exception e) {
             scheduleLogger.error("Image compression failed",e);
         }

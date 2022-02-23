@@ -24,10 +24,7 @@ import edp.davinci.core.enums.UserOrgRoleEnum;
 import edp.davinci.dao.OrganizationMapper;
 import edp.davinci.dao.RelUserOrganizationMapper;
 import edp.davinci.dao.UserMapper;
-import edp.davinci.model.LdapPerson;
-import edp.davinci.model.Organization;
-import edp.davinci.model.RelUserOrganization;
-import edp.davinci.model.User;
+import edp.davinci.model.*;
 import edp.davinci.service.LdapService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,18 +32,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
+import org.springframework.ldap.filter.AndFilter;
+import org.springframework.ldap.filter.EqualsFilter;
 import org.springframework.ldap.support.LdapUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import javax.naming.directory.DirContext;
 import java.util.List;
 
 import static edp.core.consts.Consts.EMPTY;
 import static edp.davinci.core.common.Constants.LDAP_USER_PASSWORD;
 import static org.springframework.ldap.query.LdapQueryBuilder.query;
+
 
 
 @Slf4j
@@ -85,6 +84,37 @@ public class LdapServiceImpl implements LdapService {
      */
     @Override
     public LdapPerson findByUsername(String username, String password) {
+        LdapPerson ldapPerson = new LdapPerson();
+
+        try {
+            EqualsFilter filter = new EqualsFilter("sAMAccountName", username);
+            boolean res = ldapTemplate.authenticate("", filter.toString(), password);
+            if (false == res) {
+                return null;
+            }
+
+            List<LdapPerson> search = ldapTemplate.search(
+                    query().where("objectclass").is("person").and("sAMAccountName").is(username),
+                    (AttributesMapper<LdapPerson>) attributes -> {
+                        LdapPerson person = new LdapPerson();
+                        person.setName(attributes.get("cn").get().toString());
+                        person.setSAMAccountName(attributes.get("sAMAccountName").get().toString());
+                        person.setEmail(attributes.get("mail").get().toString());
+                        return person;
+                    });
+            if (!CollectionUtils.isEmpty(search)) {
+                ldapPerson = search.get(0);
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return null;
+        }
+
+        return ldapPerson;
+    }
+    /*
+    @Override
+    public LdapPerson findByUsername(String username, String password) {
 		LdapPerson ldapPerson = null;
 
 		if (StringUtils.endsWithIgnoreCase(username, ldapDomainName)) {
@@ -119,6 +149,7 @@ public class LdapServiceImpl implements LdapService {
 
 		return ldapPerson;
     }
+     */
 
     @Override
     @Transactional

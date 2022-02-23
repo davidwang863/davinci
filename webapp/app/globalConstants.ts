@@ -303,6 +303,6 @@ export const DEFAULT_FONT_FAMILY =
 export const DEFAULT_DATE_FORMAT = 'YYYY-MM-DD'
 export const DEFAULT_DATETIME_FORMAT = 'YYYY-MM-DD HH:mm:ss'
 
-export const DEFAULT_JWT_TOKEN_EXPIRED = 60 * 60 * 1000 // ms
+export const DEFAULT_JWT_TOKEN_EXPIRED = 7 * 24 * 60 * 60 * 1000 // ms， 7days, default value, fetch from backend while running.
 export const DOWNLOAD_LIST_POLLING_FREQUENCY = 30000 // ms
 export const DEFAULT_CACHE_EXPIRED = 300 // sec

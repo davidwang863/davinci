@@ -65,9 +65,9 @@ const FindPassword: React.FC<FormComponentProps> = React.memo(() => {
       <nav className={styles.header}>
         <div className={styles.logoPc}>
           <div className={styles.logo}>
-            <Link to="/login">
-              <img src={require('assets/images/logo.svg')} />
-            </Link>
+            {/*<Link to="/login">*/}
+            {/*  <img src={require('assets/images/logo.svg')} />*/}
+            {/*</Link>*/}
           </div>
         </div>
         <div className={styles.resetPw}>重置密码</div>

@@ -76,8 +76,9 @@ export class Login extends React.PureComponent<
   }
 
   private findPassword = () => {
-    const { history } = this.props
-    history.push('/findPassword')
+    //const { history } = this.props
+    //history.push('https://momenta.feishu.cn/wiki/wikcnNNgmlAm8cEznGpZ9U1o0xd')
+    window.open('https://momenta.feishu.cn/wiki/wikcnNNgmlAm8cEznGpZ9U1o0xd')
   }
 
   private changeUsername = (e: ChangeEvent<HTMLInputElement>) => {
@@ -136,8 +137,8 @@ export class Login extends React.PureComponent<
           onChangePassword={this.changePassword}
           onLogin={this.doLogin}
         />
-        {/*
         <p className={styles.tips}>
+          {/*
           <a
             href="javascript:;"
             className={styles.register}
@@ -145,15 +146,15 @@ export class Login extends React.PureComponent<
           >
             注册新账户
           </a>
+          */}
           <a
             href="javascript:;"
             className={styles.forgetPassword}
             onClick={this.findPassword}
           >
-            忘记密码？
+            使用手册
           </a>
         </p>
-        */}
         {oauth2Enabled && <ExternalLogin />}
       </div>
     )

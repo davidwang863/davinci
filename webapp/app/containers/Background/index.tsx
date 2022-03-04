@@ -42,8 +42,10 @@ export const Background: FC = () => {
           </span>
         ) : (
           <>
+            {/*
             <b>版本： </b>
             <span>{version}</span>
+            */}
           </>
         )}
       </p>
@@ -52,11 +54,11 @@ export const Background: FC = () => {
 
   return (
     <div className={styles.container}>
-      <Canvas />
-      <img
-        className={styles.logo}
-        src={require('assets/images/logo_light.svg')}
-      />
+      {/*<Canvas />*/}
+      {/*<img*/}
+      {/*  className={styles.logo}*/}
+      {/*  src={require('assets/images/logo_light.svg')}*/}
+      {/*/>*/}
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />

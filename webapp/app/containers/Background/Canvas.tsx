@@ -41,7 +41,7 @@ export class Canvas extends React.Component<{}, {}> {
 
   public componentDidMount () {
     // TODO to verify the performance under one or multiple chunks
-    this.drawBackground()
+    //this.drawBackground()
   }
 
   public componentWillUnmount () {

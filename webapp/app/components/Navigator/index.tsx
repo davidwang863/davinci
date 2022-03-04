@@ -41,7 +41,7 @@ import { IDownloadRecord } from 'app/containers/App/types'
 const styles = require('./Navigator.less')
 
 const goGithub = () => window.open('https://github.com/edp963/davinci')
-const goDoc = () => window.open('https://edp963.github.io/davinci/')
+const goDoc = () => window.open('https://momenta.feishu.cn/wiki/wikcnNNgmlAm8cEznGpZ9U1o0xd')
 
 interface INavigatorProps {
   show: boolean
@@ -84,16 +84,16 @@ export function Navigator (props: INavigatorProps) {
     <nav className={headerClass}>
       <div className={styles.logoPc}>
         <div className={styles.logo}>
-          <Link to="/projects">
-            <img src={require('assets/images/logo.svg')} />
-          </Link>
+          {/*<Link to="/projects">*/}
+          {/*  <img src={require('assets/images/logo.svg')} />*/}
+          {/*</Link>*/}
         </div>
       </div>
       <div className={styles.logoMobile}>
         <div className={styles.logo}>
-          <Link to="/projects">
-            <img src={require('assets/images/logo_mobile.svg')} />
-          </Link>
+          {/*<Link to="/projects">*/}
+          {/*  <img src={require('assets/images/logo_mobile.svg')} />*/}
+          {/*</Link>*/}
         </div>
       </div>
       <ul className={styles.tools}>
@@ -107,9 +107,11 @@ export function Navigator (props: INavigatorProps) {
         <li>
           <Icon type="file-text" onClick={goDoc} />
         </li>
+        {/*
         <li>
           <Icon type="github" onClick={goGithub}/>
         </li>
+        */}
         <li>
           <Dropdown overlay={menu} trigger={['click']} placement="bottomCenter">
             <Icon type="user" />
